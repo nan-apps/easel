@@ -17,6 +17,6 @@
     </div>
     <hr>
     @push('structured-data-js')
-        @include('canvas::frontend.blog.partials.post-structured-data')
+        @include('canvas::frontend.blog.partials.posts-structured-data')
     @endpush
 @endforeach
