@@ -47,6 +47,6 @@
     <script src="{{ asset('vendor/canvas/assets/js/frontend.js') }}" charset="utf-8"></script>
 @endsection
 
-@section('structured-data-js')
+@push('structured-data-js')
     @include('canvas::frontend.blog.partials.post-structured-data')
-@endsection
+@endpush
