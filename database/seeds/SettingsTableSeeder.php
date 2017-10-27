@@ -40,11 +40,6 @@ class SettingsTableSeeder extends Seeder
         $settings->save();
 
         $settings = new Settings();
-        $settings->setting_name = 'blog_title';
-        $settings->setting_value = 'John Doe Blog';
-        $settings->save();
-
-        $settings = new Settings();
         $settings->setting_name = 'ga_id';
         $settings->setting_value = 'johndoe12345';
         $settings->save();
