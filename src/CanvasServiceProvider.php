@@ -3,6 +3,7 @@
 namespace Canvas;
 
 use Canvas\Models\Settings;
+use Canvas\Models\Observers\SettingsObserver;
 use Canvas\Helpers\RouteHelper;
 use Canvas\Helpers\SetupHelper;
 use Canvas\Helpers\CanvasHelper;
@@ -151,6 +152,16 @@ class CanvasServiceProvider extends ServiceProvider
     }
 
     /**
+     * Register any Eloquent Model event observers.
+     *
+     * @return void
+     */
+    protected function registerEloquentObservers()
+    {
+        Settings::observe(SettingsObserver::class);
+    }
+
+    /**
      * Bootstrap the application events.
      *
      * @return void
@@ -164,6 +175,7 @@ class CanvasServiceProvider extends ServiceProvider
         $this->handleRoutes();
         $this->handleCommands();
         $this->handleAssets();
+        $this->registerEloquentObservers();
     }
 
     /**
