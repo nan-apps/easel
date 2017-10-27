@@ -3,7 +3,6 @@
 namespace Canvas;
 
 use Canvas\Models\Settings;
-use Canvas\Models\Observers\SettingsObserver;
 use Canvas\Helpers\RouteHelper;
 use Canvas\Helpers\SetupHelper;
 use Canvas\Helpers\CanvasHelper;
@@ -24,6 +23,7 @@ use Canvas\Console\Commands\Publish\Assets;
 use Canvas\Console\Commands\Publish\Config;
 use Canvas\Http\Middleware\EnsureInstalled;
 use Maatwebsite\Excel\ExcelServiceProvider;
+use Canvas\Models\Observers\SettingsObserver;
 use Canvas\Http\Middleware\EnsureNotInstalled;
 use Canvas\Console\Commands\Publish\Migrations;
 use Canvas\Extensions\ExtensionsServiceProvider;

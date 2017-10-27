@@ -58,7 +58,7 @@ class Settings extends Model
 
     /**
      * Forget the cached rows.
-     * Handled by SettingsObserver@saved
+     * Handled by SettingsObserver@saved.
      *
      * @return void
      */
