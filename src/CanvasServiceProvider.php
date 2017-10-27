@@ -106,7 +106,6 @@ class CanvasServiceProvider extends ServiceProvider
             __DIR__.'/../resources/views/backend' => base_path('resources/views/vendor/canvas/backend'),
             __DIR__.'/../resources/views/errors' => base_path('resources/views/vendor/canvas/errors'),
             __DIR__.'/../resources/views/frontend' => base_path('resources/views/vendor/canvas/frontend'),
-            __DIR__.'/../resources/views/shared' => base_path('resources/views/vendor/canvas/shared'),
         ], 'views');
     }
 
