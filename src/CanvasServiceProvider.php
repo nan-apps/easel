@@ -23,6 +23,7 @@ use Canvas\Console\Commands\Publish\Assets;
 use Canvas\Console\Commands\Publish\Config;
 use Canvas\Http\Middleware\EnsureInstalled;
 use Maatwebsite\Excel\ExcelServiceProvider;
+use Canvas\Models\Observers\SettingsObserver;
 use Canvas\Http\Middleware\EnsureNotInstalled;
 use Canvas\Console\Commands\Publish\Migrations;
 use Canvas\Extensions\ExtensionsServiceProvider;
@@ -151,6 +152,16 @@ class CanvasServiceProvider extends ServiceProvider
     }
 
     /**
+     * Register any Eloquent Model event observers.
+     *
+     * @return void
+     */
+    protected function registerEloquentObservers()
+    {
+        Settings::observe(SettingsObserver::class);
+    }
+
+    /**
      * Bootstrap the application events.
      *
      * @return void
@@ -164,6 +175,7 @@ class CanvasServiceProvider extends ServiceProvider
         $this->handleRoutes();
         $this->handleCommands();
         $this->handleAssets();
+        $this->registerEloquentObservers();
     }
 
     /**

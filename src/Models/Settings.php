@@ -57,6 +57,17 @@ class Settings extends Model
     }
 
     /**
+     * Forget the cached rows.
+     * Handled by SettingsObserver@saved.
+     *
+     * @return void
+     */
+    public static function forget()
+    {
+        static::$cachedRows = null;
+    }
+
+    /**
      * Cache the Settings values to a simple array.
      *
      * @return void
