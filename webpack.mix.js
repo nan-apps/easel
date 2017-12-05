@@ -45,7 +45,13 @@ mix
         'resources/assets/js/bootstrap-growl.min.js'
     ], assetsPath + 'js/app.js')
 
+		.copy([
+				'resources/assets/images/'
+		], assetsPath + '/images')
+
     .copy([
         'resources/assets/fonts',
-        'resources/assets/talvbansal/media-manager/fonts'
+        'resources/assets/talvbansal/media-manager/fonts',
+        'resources/assets/images/'
     ], assetsPath + '/fonts');
+
