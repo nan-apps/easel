@@ -203,13 +203,13 @@ class CanvasServiceProvider extends ServiceProvider
         $this->app->register(ExtensionsServiceProvider::class);
 
         // Register facades...
-        $loader->alias('ConfigWriter', ConfigWriter::class);
         $loader->alias('Excel', Excel::class);
         $loader->alias('Settings', Settings::class);
+        $loader->alias('CanvasSetup', SetupHelper::class);
+        $loader->alias('CanvasRoute', RouteHelper::class);
         $loader->alias('CanvasHelper', CanvasHelper::class);
         $loader->alias('CanvasConfig', ConfigHelper::class);
-        $loader->alias('CanvasRoute', RouteHelper::class);
-        $loader->alias('CanvasSetup', SetupHelper::class);
+        $loader->alias('ConfigWriter', ConfigWriter::class);
 
         // Register middleware...
         $router->aliasMiddleware('checkIfAdmin', CheckIfAdmin::class);
