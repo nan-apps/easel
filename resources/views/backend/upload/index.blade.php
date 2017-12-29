@@ -35,7 +35,7 @@
                         </h2>
                     </div>
 
-                    <media-manager prefix="/admin/"></media-manager>
+                    <media-manager prefix="{{ CanvasRoute::getAdminPrefix(true) }}"></media-manager>
                 </div>
             </div>
         </section>

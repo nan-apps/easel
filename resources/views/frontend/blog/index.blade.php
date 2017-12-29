@@ -23,5 +23,9 @@
 @stop
 
 @section('unique-js')
-    <script src="{{ elixir('vendor/canvas/assets/js/frontend.js') }}" charset="utf-8"></script>
+    <script src="{{ asset('vendor/canvas/assets/js/frontend.js') }}" charset="utf-8"></script>
 @endsection
+
+@push('structured-data-js')
+    @include('canvas::frontend.blog.partials.blog-structured-data')
+@endpush

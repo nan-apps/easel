@@ -57,10 +57,12 @@
     </div>
 </div>
 
-<media-modal v-if="showMediaManager" @close="showMediaManager = false">
-<media-manager
+<media-modal v-if="showMediaManager" @media-modal-close="showMediaManager = false">
+    <media-manager
         :is-modal="true"
         selected-event-name="resume-cv"
-@close="showMediaManager = false"
->
-</media-manager>
+        prefix="{{ CanvasRoute::getAdminPrefix(true) }}"
+        @media-modal-close="showMediaManager = false"
+    >
+    </media-manager>
+</media-modal>

@@ -2,6 +2,7 @@
 
 namespace Canvas;
 
+use Schema;
 use Canvas\Models\Settings;
 use Canvas\Helpers\RouteHelper;
 use Canvas\Helpers\SetupHelper;
@@ -23,6 +24,7 @@ use Canvas\Console\Commands\Publish\Assets;
 use Canvas\Console\Commands\Publish\Config;
 use Canvas\Http\Middleware\EnsureInstalled;
 use Maatwebsite\Excel\ExcelServiceProvider;
+use Canvas\Models\Observers\SettingsObserver;
 use Canvas\Http\Middleware\EnsureNotInstalled;
 use Canvas\Console\Commands\Publish\Migrations;
 use Canvas\Extensions\ExtensionsServiceProvider;
@@ -114,6 +116,10 @@ class CanvasServiceProvider extends ServiceProvider
      */
     private function handleMigrations()
     {
+        // change default string length
+        // @see https://github.com/laravel/framework/issues/17508
+        Schema::defaultStringLength(191);
+
         // Load the migrations...
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
     }
@@ -150,6 +156,16 @@ class CanvasServiceProvider extends ServiceProvider
     }
 
     /**
+     * Register any Eloquent Model event observers.
+     *
+     * @return void
+     */
+    protected function registerEloquentObservers()
+    {
+        Settings::observe(SettingsObserver::class);
+    }
+
+    /**
      * Bootstrap the application events.
      *
      * @return void
@@ -163,6 +179,7 @@ class CanvasServiceProvider extends ServiceProvider
         $this->handleRoutes();
         $this->handleCommands();
         $this->handleAssets();
+        $this->registerEloquentObservers();
     }
 
     /**
@@ -195,10 +212,10 @@ class CanvasServiceProvider extends ServiceProvider
         $loader->alias('CanvasSetup', SetupHelper::class);
 
         // Register middleware...
-        $router->middleware('checkIfAdmin', CheckIfAdmin::class);
-        $router->middleware('canvasInstalled', EnsureInstalled::class);
-        $router->middleware('canvasNotInstalled', EnsureNotInstalled::class);
-        $router->middleware('checkForMaintenanceMode', CheckForMaintenanceMode::class);
+        $router->aliasMiddleware('checkIfAdmin', CheckIfAdmin::class);
+        $router->aliasMiddleware('canvasInstalled', EnsureInstalled::class);
+        $router->aliasMiddleware('canvasNotInstalled', EnsureNotInstalled::class);
+        $router->aliasMiddleware('checkForMaintenanceMode', CheckForMaintenanceMode::class);
     }
 
     /**

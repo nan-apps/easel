@@ -9,6 +9,7 @@
         @include('canvas::frontend.shared.partials.header')
         @yield('content')
         @yield('unique-js')
+        @stack('structured-data-js')
         @include('canvas::frontend.shared.partials.user-generated-js')
         @include('canvas::frontend.shared.partials.footer')
     </body>

@@ -6,6 +6,7 @@
 <meta name="author" content="{{ \Canvas\Models\Settings::blogAuthor() }}">
 <meta name="description" content="{{ \Canvas\Models\Settings::blogDescription() }}">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
 <!-- Favicon -->
 <link rel="icon" type="image/png" href="{{ asset('vendor/canvas/assets/images/favicon.png') }}">

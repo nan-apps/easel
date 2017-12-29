@@ -30,13 +30,63 @@ class Settings extends Model
     public $timestamps = false;
 
     /**
+     * Cached Settings data.
+     * Key = setting name, value = setting value.
+     * @var array
+     */
+    protected static $cachedRows;
+
+    /**
+     * Get the value settings by name.
+     *
+     * @param  string $settingName Name of setting
+     * @param  string $fallback Fallback if the setting does not exist
+     * @return string
+     */
+    public static function getByName($settingName, $fallback = null)
+    {
+        if (static::$cachedRows === null) {
+            static::cache();
+        }
+
+        if (! array_key_exists($settingName, static::$cachedRows)) {
+            return $fallback;
+        }
+
+        return static::$cachedRows[$settingName];
+    }
+
+    /**
+     * Forget the cached rows.
+     * Handled by SettingsObserver@saved.
+     *
+     * @return void
+     */
+    public static function forget()
+    {
+        static::$cachedRows = null;
+    }
+
+    /**
+     * Cache the Settings values to a simple array.
+     *
+     * @return void
+     */
+    protected static function cache()
+    {
+        static::$cachedRows = static::query()
+            ->pluck('setting_value', 'setting_name')
+            ->toArray();
+    }
+
+    /**
      * Get the value of the Blog Title.
      *
      * return @string
      */
     public static function blogTitle()
     {
-        return self::getByName('blog_title');
+        return static::getByName('blog_title');
     }
 
     /**
@@ -46,7 +96,7 @@ class Settings extends Model
      */
     public static function blogSubTitle()
     {
-        return self::getByName('blog_subtitle');
+        return static::getByName('blog_subtitle');
     }
 
     /**
@@ -56,7 +106,7 @@ class Settings extends Model
      */
     public static function blogDescription()
     {
-        return self::getByName('blog_description');
+        return static::getByName('blog_description');
     }
 
     /**
@@ -66,7 +116,7 @@ class Settings extends Model
      */
     public static function blogSeo()
     {
-        return self::getByName('blog_seo');
+        return static::getByName('blog_seo');
     }
 
     /**
@@ -76,7 +126,17 @@ class Settings extends Model
      */
     public static function blogAuthor()
     {
-        return self::getByName('blog_author');
+        return static::getByName('blog_author');
+    }
+
+    /**
+     * Get the 'post is published by default' setting value.
+     *
+     * @return @bool
+     */
+    public static function postIsPublishedDefault($fallback = true)
+    {
+        return static::getByName('post_is_published_default', true);
     }
 
     /**
@@ -86,7 +146,7 @@ class Settings extends Model
      */
     public static function canvasVersion()
     {
-        return self::getByName('canvas_version');
+        return static::getByName('canvas_version');
     }
 
     /**
@@ -104,7 +164,7 @@ class Settings extends Model
         if (! Schema::hasTable(CanvasHelper::TABLES['settings'])) {
             return false;
         } else {
-            return self::getByName('installed');
+            return static::getByName('installed');
         }
     }
 
@@ -115,7 +175,7 @@ class Settings extends Model
      */
     public static function latestRelease()
     {
-        return self::getByName('latest_release');
+        return static::getByName('latest_release');
     }
 
     /**
@@ -125,7 +185,7 @@ class Settings extends Model
      */
     public static function disqus()
     {
-        return self::getByName('disqus_name');
+        return static::getByName('disqus_name');
     }
 
     /**
@@ -135,7 +195,7 @@ class Settings extends Model
      */
     public static function changyanAppId()
     {
-        return self::getByName('changyan_appid');
+        return static::getByName('changyan_appid');
     }
 
     /**
@@ -145,7 +205,7 @@ class Settings extends Model
      */
     public static function changyanConf()
     {
-        return self::getByName('changyan_conf');
+        return static::getByName('changyan_conf');
     }
 
     /**
@@ -155,18 +215,7 @@ class Settings extends Model
      */
     public static function gaId()
     {
-        return self::getByName('ga_id');
-    }
-
-    /**
-     * Get the value settings by name.
-     *
-     * @param string $settingName
-     * @return string
-     */
-    public static function getByName($settingName)
-    {
-        return self::where('setting_name', $settingName)->pluck('setting_value')->first();
+        return static::getByName('ga_id');
     }
 
     /**
@@ -178,7 +227,7 @@ class Settings extends Model
      */
     public static function twitterCardType()
     {
-        return $twitterCardType = self::where('setting_name', 'twitter_card_type')->pluck('setting_value')->first();
+        return static::getByName('twitter_card_type');
     }
 
     /**
@@ -188,7 +237,7 @@ class Settings extends Model
      */
     public static function customCSS()
     {
-        return $customCSS = self::where('setting_name', 'custom_css')->pluck('setting_value')->first();
+        return static::getByName('custom_css');
     }
 
     /**
@@ -198,7 +247,7 @@ class Settings extends Model
      */
     public static function customJS()
     {
-        return $customJS = self::where('setting_name', 'custom_js')->pluck('setting_value')->first();
+        return static::getByName('custom_js');
     }
 
     /**
@@ -209,6 +258,6 @@ class Settings extends Model
      */
     public static function socialHeaderIconsUserId()
     {
-        return $socialHeaderIconsUserId = self::where('setting_name', 'social_header_icons_user_id')->pluck('setting_value')->first();
+        return static::getByName('social_header_icons_user_id');
     }
 }

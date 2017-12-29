@@ -16,4 +16,7 @@
         <p style="font-size: 13px"><a href="{{ $post->url($tag) }}">READ MORE...</a></p>
     </div>
     <hr>
+    @push('structured-data-js')
+        @include('canvas::frontend.blog.partials.posts-structured-data')
+    @endpush
 @endforeach
