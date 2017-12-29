@@ -2,6 +2,7 @@
 
 namespace Canvas;
 
+use Schema;
 use Canvas\Models\Settings;
 use Canvas\Helpers\RouteHelper;
 use Canvas\Helpers\SetupHelper;
@@ -116,6 +117,10 @@ class CanvasServiceProvider extends ServiceProvider
      */
     private function handleMigrations()
     {
+        // change default string length
+        // @see https://github.com/laravel/framework/issues/17508
+        Schema::defaultStringLength(191);
+
         // Load the migrations...
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
     }

@@ -14,9 +14,9 @@ class CreateCanvasPostsTable extends Migration
     {
         Schema::create(CanvasHelper::TABLES['posts'], function (Blueprint $table) {
             $table->increments('id');
-            $table->string('slug')->unique();
-            $table->string('title');
-            $table->string('subtitle');
+            $table->string('slug', 255);
+            $table->string('title', 255);
+            $table->string('subtitle', 255);
             $table->text('content_raw');
             $table->text('content_html');
             $table->string('page_image')->nullable();
