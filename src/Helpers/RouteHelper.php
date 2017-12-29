@@ -72,9 +72,9 @@ class RouteHelper extends CanvasHelper
 
     /**
      * Get admin prefix.
-     * 
-     * @param boolean $withSlashes Wheather wrapping slashes should be returned.
-     * @param integer $slashPos Used to determine where slashes must appear. (i.e. 1 => after, -1 => before, other => both sides)
+     *
+     * @param bool $withSlashes Wheather wrapping slashes should be returned.
+     * @param int $slashPos Used to determine where slashes must appear. (i.e. 1 => after, -1 => before, other => both sides)
      * @return string
      */
     public static function getAdminPrefix($withSlashes = false, $slashPos = 0)
@@ -84,7 +84,7 @@ class RouteHelper extends CanvasHelper
         $prefix = is_null($val) ? self::ROUTE_DEFAULT_ADMIN_PREFIX : $val;
 
         // add slashes if requested
-        if ($withSlashes && (!empty($prefix) && $prefix != '/')) {
+        if ($withSlashes && (! empty($prefix) && $prefix != '/')) {
             if ($slashPos == -1) {
                 $prefix = "/{$prefix}";
             } elseif ($slashPos == 1) {
