@@ -97,11 +97,11 @@ class CanvasServiceProvider extends ServiceProvider
         Carbon::setLocale(config('app.locale'));
 
         // Load translations...
-        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'canvas');
+        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'canvas');
 
         // Allow publishing translation files, with tag: translations
         $this->publishes([
-            __DIR__ . '/../resources/lang' => base_path('resources/lang/vendor/canvas'),
+            __DIR__.'/../resources/lang' => base_path('resources/lang/vendor/canvas'),
         ], 'translations');
     }
 
