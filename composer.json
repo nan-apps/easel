@@ -1,13 +1,13 @@
 {
-	"name": "cnvs/easel",
+	"name": "nan-apps/easel",
 	"description": "Canvas Framework",
 	"keywords": ["canvas", "framework"],
 	"type": "canvas-framework",
 	"license": "MIT",
 	"authors": [
 		{
-			"name": "Todd Austin",
-			"email": "austin.todd.j@gmail.com"
+			"name": "Gaston Nan",
+			"email": "gaston@nan-apps.com"
 		}
 	],
 	"require": {
