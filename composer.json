@@ -1,13 +1,13 @@
 {
-	"name": "cnvs/easel",
+	"name": "nan-apps/easel",
 	"description": "Canvas Framework",
 	"keywords": ["canvas", "framework"],
 	"type": "canvas-framework",
 	"license": "MIT",
 	"authors": [
 		{
-			"name": "Todd Austin",
-			"email": "austin.todd.j@gmail.com"
+			"name": "Gaston Nan",
+			"email": "gaston@nan-apps.com"
 		}
 	],
 	"require": {
@@ -37,7 +37,7 @@
 		}
 	},
 	"suggest": {
-		"cnvs/paper-dark": "Official dark theme for Canvas (~1.0)."
+		"nan-apps/formento-theme": "Unofficial theme for Canvas"
 	},
 	"config": {
         "sort-packages": true
