@@ -27,8 +27,9 @@ class BlogController extends Controller
         $socialHeaderIconsUser = User::where('id', Settings::socialHeaderIconsUserId())->first();
         $css = Settings::customCSS();
         $js = Settings::customJS();
+        $tags = Tag::all();
 
-        return view($layout, $data, compact('css', 'js', 'socialHeaderIconsUser'));
+        return view($layout, $data, compact('css', 'js', 'socialHeaderIconsUser', 'tags'));
     }
 
     /**

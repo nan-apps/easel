@@ -96,4 +96,16 @@ class Tag extends Model
 
         return $layout ?: $default;
     }
+
+    /**
+     * Return the tag link.
+     *
+     * @return string
+     */
+    public function getLink()
+    {
+        $url = route('canvas.blog.post.index', ['tag' => $this->tag]);
+        $return = '<a href="'.url($url).'">#'.e($this->title).'</a>&nbsp;';
+        return $return;
+    }
 }
