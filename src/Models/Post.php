@@ -216,4 +216,18 @@ class Post extends Model
     {
         return User::where('id', $id)->pluck('display_name')->first();
     }
+
+    /**
+     * Return older post before this one or null.
+     *
+     * @param Tag $tag
+     * @return Post
+     */
+    public static function getLastPublishedPost()
+    {
+        $query =
+        static::where('is_published', 1)
+                ->orderBy('published_at', 'desc');
+        return $query->first();
+    }
 }

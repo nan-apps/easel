@@ -28,8 +28,9 @@ class BlogController extends Controller
         $css = Settings::customCSS();
         $js = Settings::customJS();
         $tags = Tag::all();
+        $lastPublishedPostId = Post::getLastPublishedPost()->id;
 
-        return view($layout, $data, compact('css', 'js', 'socialHeaderIconsUser', 'tags'));
+        return view($layout, $data, compact('css', 'js', 'socialHeaderIconsUser', 'tags', 'lastPublishedPostId'));
     }
 
     /**
@@ -42,6 +43,8 @@ class BlogController extends Controller
     public function showPost($slug, Request $request)
     {
         $post = Post::with('tags')->whereSlug($slug)->firstOrFail();
+        $lastPublishedPost = Post::getLastPublishedPost();
+        $isLastPublishedPost = $post->id == $lastPublishedPost->id;
         $socialHeaderIconsUser = User::where('id', Settings::socialHeaderIconsUserId())->first();
         $user = User::where('id', $post->user_id)->firstOrFail();
         $tag = $request->get('tag');
@@ -57,6 +60,6 @@ class BlogController extends Controller
             return redirect()->route('canvas.blog.post.index');
         }
 
-        return view($post->layout, compact('post', 'tag', 'slug', 'title', 'user', 'css', 'js', 'socialHeaderIconsUser'));
+        return view($post->layout, compact('post', 'tag', 'slug', 'title', 'user', 'css', 'js', 'socialHeaderIconsUser', 'isLastPublishedPost'));
     }
 }
