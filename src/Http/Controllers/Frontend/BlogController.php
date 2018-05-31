@@ -48,6 +48,7 @@ class BlogController extends Controller
         $socialHeaderIconsUser = User::where('id', Settings::socialHeaderIconsUserId())->first();
         $user = User::where('id', $post->user_id)->firstOrFail();
         $tag = $request->get('tag');
+        $tags = Tag::all();
         $title = $post->title;
         $css = Settings::customCSS();
         $js = Settings::customJS();
@@ -60,6 +61,6 @@ class BlogController extends Controller
             return redirect()->route('canvas.blog.post.index');
         }
 
-        return view($post->layout, compact('post', 'tag', 'slug', 'title', 'user', 'css', 'js', 'socialHeaderIconsUser', 'isLastPublishedPost'));
+        return view($post->layout, compact('post', 'tag', 'tags', 'slug', 'title', 'user', 'css', 'js', 'socialHeaderIconsUser', 'isLastPublishedPost'));
     }
 }
